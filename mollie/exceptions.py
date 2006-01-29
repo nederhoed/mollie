@@ -1,5 +1,5 @@
 class MollieException(Exception):
-    pass
+    resultcode = -1
 
 class NoUsernameException(MollieException):
     resultcode = 20
@@ -39,3 +39,5 @@ class GatewayUnreachableException(MollieException):
 
 class UnknownException(MollieException):
     resultcode = 99
+
+by_code = dict((i.resultcode, i) for i in [ NoUsernameException, NoPasswordException, InvalidOriginatorException, RecipientMissingException, MessageMissingException, InvalidRecipientException, InvalidOriginatorException, InvalidMessageException, ParameterException, AuthenticationException, InsufficientCreditsException, GatewayUnreachableException, UnknownException ])

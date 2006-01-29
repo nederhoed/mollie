@@ -4,12 +4,12 @@ from distutils.command.install_scripts import install_scripts
 import os, sys
 from glob import fnmatch
 
-from mollie.version import version
+import version
 
 ignore = ('CVS', )
         
 setup(name = "mollie", 
-      version = version,
+      version = version.version,
       maintainer = 'Ivo van der Wijk',
       maintainer_email = 'ivo@m3r.nl',
       author = 'Ivo van der Wijk',
