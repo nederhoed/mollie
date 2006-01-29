@@ -1,4 +1,4 @@
-
+import mollie.exceptions
 import urllib, urllib2
 from xml.dom.minidom import parseString
 import types
@@ -73,11 +73,14 @@ class Mollie:
         responsexml = response.read()
         dom = parseString(responsexml)
         recipients = int(dom.getElementsByTagName("recipients")[0].childNodes[0].data)
-        success = bool(dom.getElementsByTagName("success")[0].childNodes[0].data)
+        success = dom.getElementsByTagName("success")[0].childNodes[0].data
         resultcode = int(dom.getElementsByTagName("resultcode")[0].childNodes[0].data)
         resultmessage = dom.getElementsByTagName("resultmessage")[0].childNodes[0].data
 
-        if not success:
+        print responsexml
+        print success
+        if success != "true":
+            print "fout"
             e = mollie.exceptions.by_code[resultcode]
             raise e(resultmessage)
 
