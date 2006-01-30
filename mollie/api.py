@@ -15,6 +15,10 @@ class Mollie:
     DUTCH_GW=1
     FOREIGN_GW=2
 
+    NORMAL_SMS = "normal"
+    WAPPUSH_SMS = "wappush"
+    VCARD_SMS = "vcard"
+
     def __init__(self, username, password, originator=None,
                  molliegw=None, gateway=None):
         """
@@ -77,10 +81,7 @@ class Mollie:
         resultcode = int(dom.getElementsByTagName("resultcode")[0].childNodes[0].data)
         resultmessage = dom.getElementsByTagName("resultmessage")[0].childNodes[0].data
 
-        print responsexml
-        print success
         if success != "true":
-            print "fout"
             e = mollie.exceptions.by_code[resultcode]
             raise e(resultmessage)
 
