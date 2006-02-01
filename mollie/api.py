@@ -48,18 +48,19 @@ class Mollie:
         self.gateway = gateway or Mollie.FOREIGN_GW
                  
     def send(self, recipients, message, originator=None, deliverydate=None,
-             smstype=None):
+             smstype=None, dryrun=False):
         """             
             Send a single SMS using the instances default configuration
         """
         originator = originator or self.originator
         
-        return self.sendsms(self.username, self.password, originator, recipients,
-                message, self.molliegw, self.gateway, deliverydate, smstype)
+        return self.sendsms(self.username, self.password, originator, 
+               recipients, message, self.molliegw, self.gateway, 
+               deliverydate, smstype, dryrun)
 
     def sendsms(cls, username, password, originator, recipients, 
                 message, molliegw=None, gateway=None, deliverydate=None, 
-                smstype=None):
+                smstype=None, dryrun=False):
         if type(recipients) not in (types.TupleType, types.ListType):
             recipients = [recipients]
         args = {}
@@ -73,6 +74,10 @@ class Mollie:
         # optional arguments
 
         url = molliegw + "?" + urllib.urlencode(args)
+        if dryrun:
+            print url
+            return 0
+
         response = urllib2.urlopen(url)
         responsexml = response.read()
         dom = parseString(responsexml)
