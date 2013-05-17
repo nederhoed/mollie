@@ -1,8 +1,4 @@
 from distutils.core import setup
-from distutils.command.install_scripts import install_scripts
-
-import os, sys
-from glob import fnmatch
 
 import version
 
@@ -18,7 +14,7 @@ setup(name = "molliesms",
       url = 'https://github.com/iivvoo/mollie',
       description = 'Mollie.nl SMS gateway API in Python',
       long_description = """\
-An Python API Implementation for the mollie.nl SMS Gateway""",
+A Python API Implementation for the mollie.nl SMS Gateway""",
       license = "BSD License",
       packages = ["molliesms"],
-)
+      )
