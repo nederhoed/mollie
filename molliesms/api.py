@@ -9,7 +9,7 @@ import types
 class MollieSMS(object):
     """\
     The Mollie class allows you to send multiple sms messages using a single
-    configuration. As an alternative, you can specify all arguments using the 
+    configuration. As an alternative, you can specify all arguments using the
     'sendsms' classmethod
     """
     DEFAULT_MOLLIEGW = "http://www.mollie.nl/xml/sms/"
@@ -37,9 +37,9 @@ class MollieSMS(object):
         molliegw
                 Full url of the Mollie SMS gateway. Two predefined
                 gateways are available,
-                
+
                 MollieSMS.DEFAULT_MOLLIEGW
-                    Standard (non secure) production gateway      
+                    Standard (non secure) production gateway
 
                 MollieSMS.Secure_MOLLIEGW
                     Secure production gateway (https)
@@ -49,20 +49,20 @@ class MollieSMS(object):
         self.originator = originator
         self.molliegw = molliegw or MollieSMS.DEFAULT_MOLLIEGW
         self.gateway = gateway or MollieSMS.FOREIGN_GW
-                 
+
     def send(self, recipients, message, originator=None, deliverydate=None,
              smstype=None, dryrun=False):
         """\
         Send a single SMS using the instances default configuration
         """
         originator = originator or self.originator
-        
-        return self.sendsms(self.username, self.password, originator, 
-               recipients, message, self.molliegw, self.gateway, 
+
+        return self.sendsms(self.username, self.password, originator,
+               recipients, message, self.molliegw, self.gateway,
                deliverydate, smstype, dryrun)
 
-    def sendsms(cls, username, password, originator, recipients, 
-                message, molliegw=None, gateway=None, deliverydate=None, 
+    def sendsms(cls, username, password, originator, recipients,
+                message, molliegw=None, gateway=None, deliverydate=None,
                 smstype=None, dryrun=False):
         if type(recipients) not in (types.TupleType, types.ListType):
             recipients = [recipients]
@@ -94,5 +94,5 @@ class MollieSMS(object):
             raise e(resultmessage)
 
         return recipients
-        
+
     sendsms = classmethod(sendsms)

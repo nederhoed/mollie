@@ -7,7 +7,7 @@ from glob import fnmatch
 import version
 
 ignore = ('CVS', )
-        
+
 setup(name = "molliesms",
       version = version.version,
       maintainer = 'Ivo van der Wijk',
