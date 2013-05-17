@@ -1,19 +1,22 @@
+"""\
+Python implementation of the Mollie SMS Abstract Programming Interface
+"""
 import mollie.exceptions
 import urllib, urllib2
 from xml.dom.minidom import parseString
 import types
 
-class Mollie:
+class MollieSMS(object):
+    """\
+    The Mollie class allows you to send multiple sms messages using a single
+    configuration. As an alternative, you can specify all arguments using the 
+    'sendsms' classmethod
     """
-        The Mollie class allows you to send multiple sms messages using a single
-        configuration. As an alternative, you can specify all arguments using the 
-        'sendsms' classmethod
-    """
-    DEFAULT_MOLLIEGW="http://www.mollie.nl/xml/sms/"
-    SECURE_MOLLIEGW="http://www.mollie.nl/xml/sms/"
+    DEFAULT_MOLLIEGW = "http://www.mollie.nl/xml/sms/"
+    SECURE_MOLLIEGW = "https://www.mollie.nl/xml/sms/"
 
-    DUTCH_GW=1
-    FOREIGN_GW=2
+    DUTCH_GW = 1
+    FOREIGN_GW = 2
 
     NORMAL_SMS = "normal"
     WAPPUSH_SMS = "wappush"
@@ -21,36 +24,36 @@ class Mollie:
 
     def __init__(self, username, password, originator=None,
                  molliegw=None, gateway=None):
-        """
-            Initialize the Mollie class. This configuration will be reused
-            with each 'send' call.
+        """\
+        Initialize the Mollie class. This configuration will be reused
+        with each 'send' call.
 
-            username
-                    authentication username
-            password
-                    authentication password
-            originator
-                    SMS originator phonenumber, i.e. +31612345678
-            molliegw
-                    Full url of the Mollie SMS gateway. Two predefined
-                    gateways are available,
-                    
-                    Mollie.DEFAULT_MOLLIEGW
-                        Standard (non secure) production gateway      
+        username
+                authentication username
+        password
+                authentication password
+        originator
+                SMS originator phonenumber, i.e. +31612345678
+        molliegw
+                Full url of the Mollie SMS gateway. Two predefined
+                gateways are available,
+                
+                MollieSMS.DEFAULT_MOLLIEGW
+                    Standard (non secure) production gateway      
 
-                    Mollie.Secure_MOLLIEGW
-                        Secure production gateway (https)
+                MollieSMS.Secure_MOLLIEGW
+                    Secure production gateway (https)
         """
         self.username = username
         self.password = password
         self.originator = originator
-        self.molliegw = molliegw or Mollie.DEFAULT_MOLLIEGW
-        self.gateway = gateway or Mollie.FOREIGN_GW
+        self.molliegw = molliegw or MollieSMS.DEFAULT_MOLLIEGW
+        self.gateway = gateway or MollieSMS.FOREIGN_GW
                  
     def send(self, recipients, message, originator=None, deliverydate=None,
              smstype=None, dryrun=False):
-        """             
-            Send a single SMS using the instances default configuration
+        """\
+        Send a single SMS using the instances default configuration
         """
         originator = originator or self.originator
         
@@ -69,7 +72,7 @@ class Mollie:
         args['originator'] = originator
         args['recipients'] = ",".join(recipients)
         args['message'] = message
-        molliegw = molliegw or Mollie.DEFAULT_MOLLIEGW
+        molliegw = molliegw or MollieSMS.DEFAULT_MOLLIEGW
 
         # optional arguments
 
