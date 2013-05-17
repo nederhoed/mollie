@@ -15,7 +15,7 @@ setup(name = "molliesms",
       author = 'Ivo van der Wijk',
       author_email = 'ivo@m3r.nl',
       platforms = ['any'],
-      url = 'http://projects.m3r.nl/opensource/trac/mollie',
+      url = 'https://github.com/iivvoo/mollie',
       description = 'Mollie.nl SMS gateway API in Python',
       long_description = """\
 An Python API Implementation for the mollie.nl SMS Gateway""",
