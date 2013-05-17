@@ -1,10 +1,13 @@
 """\
 Python implementation of the Mollie SMS Abstract Programming Interface
 """
-import mollie.exceptions
-import urllib, urllib2
 from xml.dom.minidom import parseString
 import types
+import urllib
+import urllib2
+
+import molliesms.exceptions
+
 
 class MollieSMS(object):
     """\
@@ -90,7 +93,7 @@ class MollieSMS(object):
         resultmessage = dom.getElementsByTagName("resultmessage")[0].childNodes[0].data
 
         if success != "true":
-            e = mollie.exceptions.by_code[resultcode]
+            e = molliesms.exceptions.by_code[resultcode]
             raise e(resultmessage)
 
         return recipients
