@@ -14,9 +14,12 @@ class MollieSMS(object):
     The Mollie class allows you to send multiple sms messages using a single
     configuration. As an alternative, you can specify all arguments using the
     'sendsms' classmethod
+    
+    As per august 2014, old Mollie will not work anymore. All SMS services 
+    have moved to Messagebird. Only secure call can be made to the SMS service.
     """
-    DEFAULT_MOLLIEGW = "http://www.mollie.nl/xml/sms/"
-    SECURE_MOLLIEGW = "https://www.mollie.nl/xml/sms/"
+    DEFAULT_MOLLIEGW = "https://api.messagebird.com/xml/sms"
+    SECURE_MOLLIEGW = "https://api.messagebird.com/xml/sms"
 
     DUTCH_GW = 1
     FOREIGN_GW = 2
