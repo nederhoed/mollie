@@ -35,3 +35,6 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# VirtualEnv (we assume you name it 'venv')
+venv
