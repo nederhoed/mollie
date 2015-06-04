@@ -87,7 +87,7 @@ class MollieSMS(object):
             print url
             return 0
 
-        response = urllib2.urlopen(url)
+        response = urllib2.urlopen(url, timeout=30)
         responsexml = response.read()
         dom = parseString(responsexml)
         recipients = int(dom.getElementsByTagName("recipients")[0].childNodes[0].data)
