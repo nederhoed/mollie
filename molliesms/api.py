@@ -3,8 +3,8 @@ Python implementation of the Mollie SMS Abstract Programming Interface
 """
 from xml.dom.minidom import parseString
 import types
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 
 import molliesms.exceptions
 
@@ -70,7 +70,7 @@ class MollieSMS(object):
     def sendsms(cls, username, password, originator, recipients,
                 message, molliegw=None, gateway=None, deliverydate=None,
                 smstype=None, dryrun=False):
-        if type(recipients) not in (types.TupleType, types.ListType):
+        if type(recipients) not in (tuple, list):
             recipients = [recipients]
         args = {}
         args['username'] = username
@@ -82,12 +82,12 @@ class MollieSMS(object):
 
         # optional arguments
 
-        url = molliegw + "?" + urllib.urlencode(args)
+        url = molliegw + "?" + urllib.parse.urlencode(args)
         if dryrun:
-            print url
+            print(url)
             return 0
 
-        response = urllib2.urlopen(url, timeout=30)
+        response = urllib.request.urlopen(url, timeout=30)
         responsexml = response.read()
         dom = parseString(responsexml)
         recipients = int(dom.getElementsByTagName("recipients")[0].childNodes[0].data)
